@@ -11,6 +11,8 @@ count = 0
 global data
 data = "november_2019"
 
+global images
+images = []
 def mkdir_p(path):
     try:
         os.makedirs(path)
@@ -20,19 +22,6 @@ def mkdir_p(path):
         else:
             raise
 
-#mkdir_p(data + "/images")
-
-filenames = []
-for root, dirs, files in os.walk('.'):
-    for file in files:
-        if file.endswith(".png"):
-             filenames.append(file)
-
-images = []
-for filename in filenames:
-    images.append(imageio.imread(filename))
-
-imageio.mimsave(data + '/result.gif', images, duration=5)
 
 def showDf(df_select):
 
@@ -78,6 +67,9 @@ def showDf(df_select):
   global count
   global data
   plt.savefig(data + '/{}.png'.format(count))
+
+  images.append(imageio.imread(data + '/{}.png'.format(count)))
+
   count = count+1
 
 def sortDf(df_in, offset):
@@ -263,9 +255,13 @@ for i in range(0, shape[0]):
 
 
 showDf(df_sorted)
+showDf(df_sorted)
+showDf(df_sorted)
+showDf(df_sorted)
+showDf(df_sorted)
 
 #print df_sorted
 
-
+imageio.mimsave(data + '/result.gif', images, duration=3)
 
 
